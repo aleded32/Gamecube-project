@@ -33,4 +33,6 @@ class firstBullet : public bullet
     public:
     firstBullet();
     ~firstBullet();
+
+    void draw(int _x, int _y, int _frame);
 };

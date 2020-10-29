@@ -25,6 +25,8 @@ public:
 
     float x, y, width, height;
 	int start;
+	std::vector<firstBullet*> bullets;
+	firstBullet* pBullet;
 
     int getX()
 	{
@@ -79,6 +81,7 @@ public:
 	~enemyEnt();
 
 	void draw();
+	
 };
 
 class playerEnt : public entity
@@ -87,18 +90,16 @@ public:
 	
 	float moveSpeed;
 	GRRLIB_texImg *playerSprite;
-	std::vector<firstBullet*> bullets;
-	firstBullet* pBullet;
-	bool isfired;
+	
+	
 	
 
 	void MovePlayer();
 
-	void spawnBullet(GRRLIB_texImg* text);
 
 	void moveBullet();
 
-	void draw(); 
+	void draw(GRRLIB_ttfFont *text); 
 
 
 	void collision(int enemyX, int enemyY, int enemyW, int enemyH, GRRLIB_texImg* text);

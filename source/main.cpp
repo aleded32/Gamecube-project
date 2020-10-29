@@ -37,14 +37,14 @@ int main()
 
 	     if (PAD_ButtonsDown(0) & PAD_BUTTON_START)  break;
 		
-		GRRLIB_FillScreen(GRRLIB_BLACK);
+		GRRLIB_FillScreen(GRRLIB_WHITE);
 		PAD_ScanPads();
 
 			P->MovePlayer();
-			P->spawnBullet(GRRLIB_texImg* text);
+			
 			P->moveBullet();
 			P->collision(E->getX(), E->getY(), E->getWidth(), E->getHeight(), fonts.fontImg1);
-			P->draw();
+			P->draw(fonts.fontM);
 		
 			E->draw();
 		
