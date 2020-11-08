@@ -34,5 +34,5 @@ class firstBullet : public bullet
     firstBullet();
     ~firstBullet();
 
-    void draw(int _x, int _y, int _frame);
+    void draw(int _x, int _y, int _frame, GRRLIB_texImg* _bulletSprite);
 };

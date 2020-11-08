@@ -2,7 +2,9 @@
 
 #include "ship.h"
 #include "bullet.h"
+#include "enemysmall.h"
 #include <iostream>
+#include "time.h"
 #include <vector>
 #include <gccore.h>
 #include <grrlib.h>
@@ -24,8 +26,9 @@ public:
     ~entity(){}
 
     float x, y, width, height;
+	float moveSpeed;
 	int start;
-	std::vector<firstBullet*> bullets;
+	std::vector<firstBullet> bullets;
 	firstBullet* pBullet;
 
     int getX()
@@ -55,6 +58,10 @@ class enemyEnt : public entity
 {
 public:
 	
+	int randAngle;
+	bool hitLeft;
+	bool hitRight;
+	GRRLIB_texImg* enemySprite;
 
 	enemyEnt(float _x, float _y, float _width, float _height);
 
@@ -79,8 +86,7 @@ public:
 	}
 
 	~enemyEnt();
-
-	void draw();
+	void draw(int _x, int _y, float width , float height);
 	
 };
 
@@ -88,7 +94,7 @@ class playerEnt : public entity
 {
 public:
 	
-	float moveSpeed;
+	
 	GRRLIB_texImg *playerSprite;
 	
 	
@@ -102,7 +108,7 @@ public:
 	void draw(GRRLIB_ttfFont *text); 
 
 
-	void collision(int enemyX, int enemyY, int enemyW, int enemyH, GRRLIB_texImg* text);
+	void Bulletcollision(int enemyX, int enemyY, int enemyW, int enemyH, GRRLIB_texImg* text, std::vector<enemyEnt>& enemy);
 
 	playerEnt(float _x, float _y, float _width, float _height);
 
