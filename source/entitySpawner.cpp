@@ -50,11 +50,11 @@ void entitySpawn::spawnEnemy(GRRLIB_ttfFont* text)
 	    sprintf(str, "%d" , (int)enemies.size());
            
         
-        if(randY == 0)
+        if(randY == 0 || enemies[i].y <= 0)
         {
             enemies[i].y += cos(enemies[i].randAngle) * enemies[i].moveSpeed;
         }
-        else if(randY == 2)
+        else if(randY == 2 || enemies[i].y >=375)
         {
             enemies[i].y -= cos(enemies[i].randAngle) * enemies[i].moveSpeed;
         }
@@ -64,12 +64,12 @@ void entitySpawn::spawnEnemy(GRRLIB_ttfFont* text)
          
       
        
-       // GRRLIB_PrintfTTF(5,150, text, str2,32,0xFFFFFFFF);
+       
 
         enemies[i].draw(enemies[i].x, enemies[i].y, enemies[i].width, enemies[i].height);
        
         
-        if(enemies[i].x <= 0 || enemies[i].y <= 0 || enemies[i].y >= 375)
+        if(enemies[i].x <= 0)
         {
            enemies.erase(i + enemies.begin());
             

@@ -34,35 +34,12 @@ void score::setText()
 
 void score::setHighScore()
 {
-      
-    //playerScoreFile.open("save.sav");
 
     if(pScore > pHighScore)
     {
         pHighScore = pScore;
-        /*if(playerScoreFile.is_open())
-        {
-            //playerScoreFile << pScore;
-            //playerScoreFile.close();
-        }*/
+        
     }
    
 
 }
-
-/*void score::loadHighScore()
-{
-    tempScore = 0;
-    playerHighScoreFile.open("save.sav", std::ifstream::in);
-
-    if(playerHighScoreFile.is_open())
-    {
-        playerHighScoreFile >> tempScore;
-        playerHighScoreFile.close();
-    }
-    else
-    {
-        GRRLIB_PrintfTTF(350,100, font,  "NO SAVE FOUND" ,32,0xFFFFFFFF);
-    }
-
-}*/

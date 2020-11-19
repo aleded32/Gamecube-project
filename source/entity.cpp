@@ -149,7 +149,7 @@ void playerEnt::draw(GRRLIB_ttfFont* text)
         bullets[i].draw(bullets[i].x, bullets[i].y, bullets[i].frame, bullets[i].bulletSprite);
 
 
-        if(bullets[i].x >= 700)
+        if(bullets[i].x >= 675)
         {
             
             bullets.erase(i + bullets.begin());
@@ -157,7 +157,7 @@ void playerEnt::draw(GRRLIB_ttfFont* text)
         }
     }
     
-    //GRRLIB_PrintfTTF(5,100, text, str,32,0xFFFFFFFF);
+    
     
 }
 

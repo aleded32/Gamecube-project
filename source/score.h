@@ -10,10 +10,7 @@ class score
 {
     public:
 
-        int pScore, pHighScore, tempScore;
-
-        //std::ofstream playerScoreFile;
-        //std::ifstream playerHighScoreFile;
+        int pScore, pHighScore;
 
         GRRLIB_ttfFont* font;
 
@@ -23,7 +20,6 @@ class score
         int updateScore();
 
         void setText();
-       // void loadHighScore();
         void setHighScore();
 
 };

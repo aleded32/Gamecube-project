@@ -34,7 +34,7 @@ int main()
 	entitySpawn* S = new entitySpawn();
 	FontLoading fonts;
 	score* SC = new score(fonts.fontM);
-	//SC->loadHighScore();
+	
 
 	while(1)
 	{
@@ -45,8 +45,7 @@ int main()
 
 			SC->setText();
 
-			if(PAD_ButtonsHeld(0) & PAD_BUTTON_B)
-				P->isGameOver = false;
+			
 
 			if(P->isGameOver == false)
 			{
@@ -62,6 +61,10 @@ int main()
 			{
 				GRRLIB_Printf(100, 188, fonts.fontImg1, GRRLIB_WHITE, 1, "GAME OVER! PRESS B TO RESTART");
 				S->enemies.clear();
+
+				if(PAD_ButtonsHeld(0) & PAD_BUTTON_B)
+				P->isGameOver = false;
+
 			}
 			P->enemyCollision(SC, S->enemies);
 			
@@ -73,6 +76,7 @@ int main()
 	GRRLIB_FreeTexture(P->playerSprite);
 	GRRLIB_FreeTexture(fonts.fontImg1);
 	GRRLIB_FreeTexture(P->pBullet->bulletSprite);
+	GRRLIB_FreeTTF(SC->font);
 	
 	GRRLIB_Exit();
 
