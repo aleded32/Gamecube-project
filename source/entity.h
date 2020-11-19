@@ -3,6 +3,7 @@
 #include "ship.h"
 #include "bullet.h"
 #include "enemysmall.h"
+#include "score.h"
 #include <iostream>
 #include "time.h"
 #include <vector>
@@ -28,8 +29,10 @@ public:
     float x, y, width, height;
 	float moveSpeed;
 	int start;
+	
 	std::vector<firstBullet> bullets;
 	firstBullet* pBullet;
+	
 
     int getX()
 	{
@@ -96,8 +99,7 @@ public:
 	
 	
 	GRRLIB_texImg *playerSprite;
-	
-	
+	bool isGameOver;
 	
 
 	void MovePlayer();
@@ -108,7 +110,9 @@ public:
 	void draw(GRRLIB_ttfFont *text); 
 
 
-	void Bulletcollision(int enemyX, int enemyY, int enemyW, int enemyH, GRRLIB_texImg* text, std::vector<enemyEnt>& enemy);
+	void Bulletcollision(GRRLIB_texImg* text, std::vector<enemyEnt>& enemy, score* ptrScore);
+
+	void enemyCollision(score* ptrScore, std::vector<enemyEnt>& enemy);
 
 	playerEnt(float _x, float _y, float _width, float _height);
 

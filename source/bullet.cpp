@@ -13,10 +13,10 @@ firstBullet::firstBullet()
     frame = 0;
 
     bulletSpawnTime = 0.5;
-    bulletSpeed = 10;
+    bulletSpeed = 7;
 
     bulletSprite = GRRLIB_LoadTexture(laserbolts);
-    GRRLIB_InitTileSet(bulletSprite, width, height, frame);
+    //GRRLIB_InitTileSet(bulletSprite, width, height, frame);
 
 }
 
@@ -26,6 +26,8 @@ void firstBullet::draw(int _x, int _y, int _frame, GRRLIB_texImg* bulletSprite)
 {
     if(bulletSprite != nullptr)
     {
-           GRRLIB_DrawTile(_x, _y, bulletSprite,0,8,8,GRRLIB_WHITE, _frame);
+           //GRRLIB_DrawTile(_x, _y, bulletSprite,0,1,1,GRRLIB_WHITE, _frame);
+           GRRLIB_Rectangle(_x, _y, width, height, GRRLIB_WHITE, 0);
     }
+    
 }

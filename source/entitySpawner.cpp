@@ -30,17 +30,18 @@ void entitySpawn::spawnEnemy(GRRLIB_ttfFont* text)
         spawnTime++;
         
     }
-    if(spawnTime > 0 && spawnTime <= 30)
+    if(spawnTime > 0 && spawnTime <= 20)
     {
         spawnTime++;
     }
-    else if(spawnTime >= 30)
+    else if(spawnTime >= 20)
     {
         spawnTime = 0;
         for(int i = 0; i < 3; i++)
             randY = rand()%3;
         
     }
+    
 
     for(size_t i = 0; i < enemies.size(); i++)
     {
@@ -59,7 +60,7 @@ void entitySpawn::spawnEnemy(GRRLIB_ttfFont* text)
         }
         
         enemies[i].x -= enemy->moveSpeed;
-
+        
          
       
        

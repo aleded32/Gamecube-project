@@ -7,7 +7,7 @@ enemyEnt::enemyEnt(float _x, float _y, float _width, float _height)
 		y = _y;
 		width = _width;
 		height = _height;
-		moveSpeed = 3;
+		moveSpeed = 4;
 		enemySprite = GRRLIB_LoadTexture(enemysmall);
 }
 
@@ -30,8 +30,9 @@ playerEnt::playerEnt(float _x, float _y, float _width, float _height)
 		moveSpeed = 5;
         pBullet = new firstBullet;
         start = 0;
-        pBullet->x = x - 64;
-        pBullet->y = y - 32;
+        pBullet->x = x + 16;
+        pBullet->y = y + 16;
+		isGameOver = false;
 		
 		playerSprite = GRRLIB_LoadTexture(ship);		
 }
@@ -90,19 +91,19 @@ void playerEnt::MovePlayer()
 			
             if(start <= 0)
             {
-                pBullet->x = x - 64;
-            	pBullet->y = y - 32;
+                pBullet->x = x + 16;
+            	pBullet->y = y + 16;
                 bullets.push_back(*pBullet);
                 start +=1;
             }
 
             //isfired = true;
         }	
-        if(start > 0 && start <= 15)
+        if(start > 0 && start <= 25)
         {
             start++;
         }
-        else if(start >= 15)
+        else if(start >= 25)
         {
             start = 0;
         }
@@ -110,16 +111,18 @@ void playerEnt::MovePlayer()
 
 }
 
-void playerEnt::Bulletcollision(int enemyX, int enemyY, int enemyW, int enemyH, GRRLIB_texImg* text, std::vector<enemyEnt>& enemy)
+void playerEnt::Bulletcollision(GRRLIB_texImg* text, std::vector<enemyEnt>& enemy, score* ptrScore)
 {
 		for(size_t i = 0; i < bullets.size(); i++)
 		{
-			if(bullets[i].x > enemyX && bullets[i].x < enemyX + enemyW && bullets[i].y > enemyY && bullets[i].y < enemyY + enemyH )
+			for(size_t j = 0; j < enemy.size(); j++)
 			{
-				GRRLIB_Printf(300, 50, text, GRRLIB_WHITE, 1, "IS COLLIDING");
-				for(size_t i = 0; i < enemy.size(); i++)
+				if(bullets[i].x + bullets[i].width > enemy[j].x && bullets[i].x < enemy[j].x + (enemy[j].width * 2) && bullets[i].y + bullets[i].height > enemy[j].y && bullets[i].y < enemy[j].y + (enemy[j].height * 2))
 				{
-					enemy.erase(enemy.begin() + i);
+					GRRLIB_Printf(300, 50, text, GRRLIB_WHITE, 1, "IS COLLIDING");
+						ptrScore->updateScore();
+						enemy.erase(enemy.begin() + j);
+						bullets.erase(bullets.begin() + i);
 				}
 			}
 		}
@@ -137,7 +140,7 @@ void playerEnt::draw(GRRLIB_ttfFont* text)
     if(playerSprite != nullptr)
     {
         GRRLIB_InitTileSet(playerSprite, width,height, 0);
-        GRRLIB_DrawTile(x,y, playerSprite,90,2,2,GRRLIB_WHITE,0);
+        GRRLIB_DrawTile(x,y, playerSprite,0,2,2,GRRLIB_WHITE,0);
     }	
 	
     for(size_t i = 0; i < bullets.size(); i++)
@@ -167,6 +170,27 @@ void playerEnt::moveBullet()
     }
 
 	
+}
+
+void playerEnt::enemyCollision(score* ptrScore, std::vector<enemyEnt>& enemy)
+{
+	for(size_t j = 0; j < enemy.size(); j++)
+	{
+		if(x + (width * 2) > enemy[j].x && x < enemy[j].x + (enemy[j].width * 2) && y + (height * 2) > enemy[j].y && y < enemy[j].y + (enemy[j].height * 2))
+		{
+			isGameOver = true;
+		}
+		if(isGameOver == true)
+		{
+			
+			ptrScore->setHighScore();
+			ptrScore->pScore = 0;
+			x = 100;
+			y = 200;
+		}
+	}
+	
+		
 }
 
 
