@@ -1,13 +1,12 @@
 
 #include <gccore.h>
-#include <grrlib.h>
-#include "entity.h"
-#include "score.h"
-#include "bullet.h"
-#include "entitySpawner.h"
-#include "fontload.h"
-#include <ogc/pad.h>
 
+#include <grrlib.h>
+#include "levelManager.h"
+#include <ogc/pad.h>
+#include <asndlib.h>
+#include <mp3player.h>
+#include "gameSound.h"
 
 
 
@@ -30,59 +29,34 @@ int main()
 	PAD_Init();
 	GRRLIB_Init();
 
-	playerEnt* P = new playerEnt(100, 200, 24, 16);
-	entitySpawn* S = new entitySpawn();
-	FontLoading fonts;
-	score* SC = new score(fonts.fontM);
-	
+	//intiallise audio
+	ASND_Init();
+	MP3Player_Init();
+
+
+	levelManager* LM = new levelManager();
+	LM->currentLevel = LM->start;
+
+	//MP3Player_PlayBuffer(gameSound, gameSound_size, NULL);
 
 	while(1)
 	{
 
-	
+		
 		GRRLIB_FillScreen(GRRLIB_BLACK);
 		PAD_ScanPads();
 
-			SC->setText();
-
+		LM->levelSelector();
 			
-
-			if(P->isGameOver == false)
-			{
-				P->MovePlayer();
-				P->moveBullet();
-				S->spawnEnemy(fonts.fontM);
-				
-				
-				P->Bulletcollision(fonts.fontImg1, S->enemies, SC);
-				P->draw(fonts.fontM);
-			}
-			else
-			{
-				GRRLIB_Printf(100, 188, fonts.fontImg1, GRRLIB_WHITE, 1, "GAME OVER! PRESS B TO RESTART");
-				S->enemies.clear();
-
-				if(PAD_ButtonsHeld(0) & PAD_BUTTON_B)
-				P->isGameOver = false;
-
-			}
-			P->enemyCollision(SC, S->enemies);
-			
-
 		//place every in here to output to screen
 		GRRLIB_Render();
 	}
 
-	GRRLIB_FreeTexture(P->playerSprite);
-	GRRLIB_FreeTexture(fonts.fontImg1);
-	GRRLIB_FreeTexture(P->pBullet->bulletSprite);
-	GRRLIB_FreeTTF(SC->font);
+	LM->freeTextures();
 	
 	GRRLIB_Exit();
 
-	delete P->pBullet;
-	delete P;
-	delete S;
-	delete SC;
+	delete LM;
+	
 	return 0;
 }

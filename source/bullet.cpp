@@ -26,7 +26,6 @@ void firstBullet::draw(int _x, int _y, int _frame, GRRLIB_texImg* bulletSprite)
 {
     if(bulletSprite != nullptr)
     {
-           
            GRRLIB_Rectangle(_x, _y, width, height, GRRLIB_WHITE, 0);
     }
     

@@ -119,7 +119,7 @@ void playerEnt::Bulletcollision(GRRLIB_texImg* text, std::vector<enemyEnt>& enem
 			{
 				if(bullets[i].x + bullets[i].width > enemy[j].x && bullets[i].x < enemy[j].x + (enemy[j].width * 2) && bullets[i].y + bullets[i].height > enemy[j].y && bullets[i].y < enemy[j].y + (enemy[j].height * 2))
 				{
-					GRRLIB_Printf(300, 50, text, GRRLIB_WHITE, 1, "IS COLLIDING");
+					//GRRLIB_Printf(300, 50, text, GRRLIB_WHITE, 1, "IS COLLIDING");
 						ptrScore->updateScore();
 						enemy.erase(enemy.begin() + j);
 						bullets.erase(bullets.begin() + i);

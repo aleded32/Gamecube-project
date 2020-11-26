@@ -24,7 +24,8 @@ class entitySpawn
         entitySpawn();
         ~entitySpawn();
 
-        void spawnEnemy(GRRLIB_ttfFont* text);
+        void spawnEnemy();
+        void draw();
         
 
 };

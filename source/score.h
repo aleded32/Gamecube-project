@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include <fstream>
 #include <gccore.h>
 #include <grrlib.h>
 #include <ogc/pad.h>

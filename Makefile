@@ -17,7 +17,7 @@ include $(DEVKITPPC)/gamecube_rules
 #---------------------------------------------------------------------------------
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
-SOURCES		:=	source source/gfx
+SOURCES		:=	source
 DATA		:=	data
 INCLUDES	:=
 
@@ -34,7 +34,7 @@ LDFLAGS = -g $(MACHDEP) -Wl,-Map,$(notdir $@).map -Wl,--section-start,.init=0x81
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS	:= -lgrrlib -lfreetype -lpngu -lpng -ljpeg -lz -lfat -logc -lm 
+LIBS	:= -lgrrlib -lfreetype -lpngu -lpng -ljpeg -lz -lfat -lmad -lasnd -logc -lm 
 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
@@ -107,11 +107,6 @@ clean:
 	@rm -fr $(BUILD) $(OUTPUT).elf $(OUTPUT).dol
 
 #---------------------------------------------------------------------------------
-run:
-	wiiload $(TARGET).dol
-
-
-#---------------------------------------------------------------------------------
 else
 
 DEPENDS	:=	$(OFILES:.o=.d)
@@ -139,9 +134,9 @@ $(OFILES_SOURCES) : $(HFILES)
 	@echo $(notdir $<)
 	$(bin2o)
 #---------------------------------------------------------------------------------
-# This rule links in binary data with the .ogg extension
+# This rule links in binary data with the .mp3 extension
 #---------------------------------------------------------------------------------
-%.ogg.o	%_ogg.h :	%.ogg
+%.mp3.o	%_mp3.h :	%.mp3
 #---------------------------------------------------------------------------------
 	@echo $(notdir $<)
 	$(bin2o)
